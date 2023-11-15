@@ -17,6 +17,7 @@ day.textContent = dayName[new Date().getDay()];
 window.addEventListener('load',()=>{
     ul.innerHTML = localStorage.getItem('todo')
     input.focus()
+    taskcount()
 })
 
 //? todo lar eklenince olusacak elemanlarimiz
@@ -65,7 +66,7 @@ addButton.addEventListener("click", () => {
 
   localStorage.setItem('todo',ul.innerHTML)
   input.focus()
-
+  taskcount()
 
 });
 
@@ -84,4 +85,29 @@ ul.addEventListener("click", (e) => {
     e.target.classList.toggle("span-checked");
     e.target.previousElementSibling.classList.toggle("pchecked");
   }
+
+  localStorage.setItem('todo',ul.innerHTML)
+  taskcount()
+
 });
+
+
+function  taskcount(){
+
+    const totalTask = document.querySelectorAll('.li').length
+    const doneTask = document.querySelectorAll('.pchecked').length
+    const result = document.querySelector('.result')
+    result.classList.add('result-task')
+    result.textContent = ` ${doneTask}  OUT OF ${totalTask} TASK COMPLETED`
+   
+
+    if(!totalTask){
+        result.style.display = 'none'
+    }else{
+        result.style.display = 'block'
+    }
+
+    
+    }
+
+taskcount()
